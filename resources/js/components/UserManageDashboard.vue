@@ -22,7 +22,7 @@
       <th scope="row">{{user.id}}</th>
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
-      <td><a class="btn btn-warning"><i class="fas fa-fa-edit"></i></a></td>
+      <td><a class="btn btn-warning"><i class="fas fa-edit"></i></a>|<button class="btn btn-danger" @click='deleteUser(user)'><i class="fas fa-trash"></i></button></td>
     </tr>
    
   </tbody>
@@ -78,6 +78,13 @@ export default Vue.extend({
 
 
         },
+        deleteUser:function(user){
+            var r = confirm('are you sure to delete user')
+            if(r){
+                axios.post('/data/users/'+ user.id,{_method:"DELETE"}).then(response=>console.log(respponse.data))
+            }
+
+        },
 
         getPage:function(event){
             this.params.page = event
@@ -89,9 +96,16 @@ export default Vue.extend({
             this.active[component] = true
         },
         flashSuccess:function(event){
-            
+           this.setActive('createuser')
            this.success_message = event
            this.getUser()
+
+        },
+        flashSuccessMessage:function(message){
+            this.success_message = message
+            setTimeout(() =>{
+                this.success_message = null
+            },success)
 
         }
 

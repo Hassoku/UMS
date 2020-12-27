@@ -42285,6 +42285,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
         },
+        deleteUser:function(user){
+            var r = confirm('are you sure to delete user')
+            if(r){
+                axios.post('/data/users/'+ user.id,{_method:"DELETE"}).then(response=>console.log(respponse.data))
+            }
+
+        },
 
         getPage:function(event){
             this.params.page = event
@@ -42296,9 +42303,16 @@ __webpack_require__.r(__webpack_exports__);
             this.active[component] = true
         },
         flashSuccess:function(event){
-            
+           this.setActive('createuser')
            this.success_message = event
            this.getUser()
+
+        },
+        flashSuccessMessage:function(message){
+            this.success_message = message
+            setTimeout(() =>{
+                this.success_message = null
+            },success)
 
         }
 
@@ -42752,7 +42766,22 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(user.email))]),
                         _vm._v(" "),
-                        _vm._m(1, true)
+                        _c("td", [
+                          _vm._m(1, true),
+                          _vm._v("|"),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteUser(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-trash" })]
+                          )
+                        ])
                       ])
                     }),
                     0
@@ -42801,10 +42830,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-warning" }, [
-        _c("i", { staticClass: "fas fa-fa-edit" })
-      ])
+    return _c("a", { staticClass: "btn btn-warning" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   }
 ]
@@ -55356,8 +55383,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\laragon\www\ums\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\laragon\www\ums\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\laragon\www\UMS\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\UMS\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -24,4 +24,9 @@ class UserController extends Controller
         $user = User::create($request->only('name','email','role')+['password' => Hash::make($request->password)]);
         return response()->json(['user',$user]);
     }
+
+    public function deleteData(User $user){
+
+        return "Successfully Delete {$user->user}";
+    }
 }

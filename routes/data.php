@@ -6,6 +6,7 @@ Route::prefix('users')->namespace('Users')->group(function(){
 
     Route::get('/',[App\Http\Controllers\User\UserController::class, 'getData']);
     Route::post('/',[App\Http\Controllers\User\UserController::class, 'addData']);
+    Route::delete('/{user}',[App\Http\Controllers\User\UserController::class, 'deleteData']);
 
 
 });
